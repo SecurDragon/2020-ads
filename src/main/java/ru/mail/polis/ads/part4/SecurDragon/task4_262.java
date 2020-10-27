@@ -16,20 +16,19 @@ public class task4_262 {
     }
 
     private static void solve(final FastScanner in, final PrintWriter out) {
-        int n = in.nextInt() + 1;
-        int[] stairsCosts = new int[n];
-        stairsCosts[0] = 0;
-        for(int i = 1; i < n; ++i)
+        int n = in.nextInt();
+        int[] stairsCosts = new int[n + 2];
+        for(int i = 1; i < n + 1; ++i)
             stairsCosts[i] = in.nextInt();
 
         int maxSteps = in.nextInt();
 
-        int[] d = new int[n];
-        for(int i = 1; i < n; ++i){
-            d[i] = max(d, Math.max(0, i - maxSteps + 1), i) + stairsCosts[i];
+        int[] d = new int[n + 2];
+        for(int i = 1; i < n + 2; ++i){
+            d[i] = max(d, Math.max(0, i - maxSteps), i) + stairsCosts[i];
         }
 
-        out.println(max(d, 0, n - 1));
+        out.println(d[n+1]);
     }
 
     private static class FastScanner {
