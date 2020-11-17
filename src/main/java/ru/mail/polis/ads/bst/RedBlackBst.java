@@ -135,14 +135,14 @@ public class RedBlackBst<Key extends Comparable<Key>, Value>
             }
         }
         else {
-            if (isRed(x. left ) ) {
+            if (isRed(x.left) ) {
                 x = rotateRight(x) ;
-                x = delete(x. right, key);
+                x.right = delete(x. right, key);
             }
-            else if (x.key == key && x.right == null)
+            else if (keyComparison == 0 && x.right == null)
                 return null;
             else {
-                if (x. right != null && !isRed(x.right) && !isRed(x.right.left ))
+                if (x.right != null && !isRed(x.right) && !isRed(x.right.left ))
                     x = moveRedRight(x);
                 if (x.key == key) {
                     Node min = min(x.right);
@@ -232,6 +232,7 @@ public class RedBlackBst<Key extends Comparable<Key>, Value>
     @Override
     public Value remove(@NotNull Key key) {
         Node t = get(root, key);
+        Value val = t == null ? null : t.value;
         if(t == null) return null;
         root = delete(root, key);
 
@@ -239,7 +240,7 @@ public class RedBlackBst<Key extends Comparable<Key>, Value>
             root.color = BLACK;
 
         --count;
-        return t.value;
+        return val;
     }
 
     @Nullable
